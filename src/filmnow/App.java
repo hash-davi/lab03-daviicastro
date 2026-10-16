@@ -10,8 +10,7 @@ import java.util.Scanner;
  * @author eliane
  *
  */
-public class MainFilmNow {
-
+public class App {
     public static void main(String[] args) {
         FilmNow fn = new FilmNow();
 
@@ -88,10 +87,10 @@ public class MainFilmNow {
      */
     private static void mostrarFilmes(FilmNow fn) {
 
-        String[] filmes = fn.getFilmes();
+        Filme[] filmes = fn.getFilmes();
         for (int i = 0; i < filmes.length; i++) {
             if (filmes[i] != null) {
-                System.out.println(formataFilme(i, filmes[i]));
+                System.out.println(formataFilme(i, filmes[i].getNome()));
             }
         }
     }
@@ -105,7 +104,10 @@ public class MainFilmNow {
     private static void detalharFilme(FilmNow fn, Scanner scanner) {
         System.out.print("\nQual filme> ");
         int posicao = scanner.nextInt();
-        String filme = fn.getFilme(posicao);
+        Filme filme = fn.getFilme(posicao);
+        if (fn.isHot(filme)) {
+            System.out.println("Dados do filme:\n" + filme);
+        }
         System.out.println("Dados do filme:\n" + filme);
     }
 
@@ -132,7 +134,7 @@ public class MainFilmNow {
         System.out.print("\nNome> ");
         String nome = scanner.next();
         System.out.print("\nAno> ");
-        String ano = scanner.next();
+        int ano = scanner.nextInt();
         System.out.print("\nLocal> ");
         String local = scanner.next();
         fn.cadastraFilme(posicao, nome, ano, local);
@@ -156,7 +158,7 @@ public class MainFilmNow {
     private static void carregaFilmes(String arquivoFilmes, FilmNow fn) throws FileNotFoundException, IOException {
         LeitorFilmNow leitor = new LeitorFilmNow();
 
-        int carregados =  leitor.carregaContatos(arquivoFilmes, fn);
+        int carregados = leitor.carregaContatos(arquivoFilmes, fn);
         System.out.println("Carregamos " + carregados + " registros.");
     }
 }

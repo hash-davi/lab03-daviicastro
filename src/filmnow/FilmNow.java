@@ -7,15 +7,18 @@ package filmnow;
  *
  */
 public class FilmNow {
-    private static final int TAMANHO = 100;
+    private static final int TAM_FILMES = 100;
+    private static final int TAM_HOT = 10;
 
     private Filme[] filmes; // Uma representacao simploria da lista de filmes
+    private Filme[] hotList;
 
     /**
      * Cria o FilmNow.
      */
     public FilmNow() {
-        this.filmes = new Filme[TAMANHO];
+        this.filmes = new Filme[TAM_FILMES];
+        this.hotList = new Filme[TAM_HOT];
     }
 
     /**
@@ -47,6 +50,45 @@ public class FilmNow {
         if (verificaFilme(novoFilme)) {
             this.filmes[posicao] = novoFilme;
             return true;
+        }
+
+        return false;
+    }
+
+//    public String[] mostrarFilmes() {
+//        String[] buffer = new String[TAMANHO];
+//
+//        int i = 0;
+//        for (Filme filme : this.filmes) {
+//            if (filme != null) {
+//                buffer[i++] = filme.toString();
+//            }
+//        }
+//
+//        String[] filmesMostrados = new String[i];
+//        for (int j = 0; j < i; j++) {
+//            filmesMostrados[j] = buffer[j];
+//        }
+//
+//        return filmesMostrados;
+//    }
+
+    public boolean atribuirHot(int posicaoFilme, int posicaoHot){
+        Filme filmeAdicionado = this.filmes[posicaoFilme];
+
+        if (isHot(filmeAdicionado)) {
+            return false;
+        }
+
+        this.hotList[posicaoHot] = filmeAdicionado;
+        return true;
+    }
+
+    public boolean isHot(Filme filme) {
+        for (Filme hot : this.hotList) {
+            if (hot.equals(filme)) {
+                return true;
+            }
         }
 
         return false;
