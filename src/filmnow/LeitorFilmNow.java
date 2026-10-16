@@ -13,12 +13,10 @@ import java.io.IOException;
  *
  */
 public class LeitorFilmNow {
-
     private static final int COLUNA_POSICAO = 0;
     private static final int COLUNA_NOME = 1;
     private static final int COLUNA_ANO = 2;
     private static final int COLUNA_LOCAL = 3;
-
 
     /**
      * Lê filmes de um arquivo CSV e os coloca no sistema.
@@ -47,7 +45,6 @@ public class LeitorFilmNow {
         return carregados;
     }
 
-
     /**
      * Coloca no sistema os dados de uma linha do arquivo de filmes inicial.
      *
@@ -62,5 +59,4 @@ public class LeitorFilmNow {
 
         fn.cadastraFilme(posicao, nome, ano, local);
     }
-
 }

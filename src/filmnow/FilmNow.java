@@ -7,23 +7,22 @@ package filmnow;
  *
  */
 public class FilmNow {
-
     private static final int TAMANHO = 100;
 
-    private String[] filmes; //uma representacao simploria da lista de filmes
+    private Filme[] filmes; // Uma representacao simploria da lista de filmes
 
     /**
      * Cria o FilmNow.
      */
     public FilmNow() {
-        this.filmes = new String[TAMANHO];
+        this.filmes = new Filme[TAMANHO];
     }
 
     /**
      * Acessa a lista de filmes mantida.
      * @return O array de filmes.
      */
-    public String[] getFilmes() {
+    public Filme[] getFilmes() {
         return this.filmes.clone();
     }
 
@@ -32,7 +31,7 @@ public class FilmNow {
      * @param posicao Posição do filme no sistema.
      * @return Dados do filme. Null se não há filme na posição.
      */
-    public String getFilme(int posicao) {
+    public Filme getFilme(int posicao) {
         return filmes[posicao];
     }
 
@@ -43,8 +42,24 @@ public class FilmNow {
      * @param ano Ano de lançamento do filme.
      * @param local Local onde o filme pode ser assitido.
      */
-    public void cadastraFilme(int posicao, String nome, String ano, String local) {
-        this.filmes[posicao] = nome;
+    public boolean cadastraFilme(int posicao, String nome, int ano, String local) {
+        Filme novoFilme = new Filme(nome, ano, local);
+        if (verificaFilme(novoFilme)) {
+            this.filmes[posicao] = novoFilme;
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean verificaFilme(Filme filme) {
+        for (Filme f : this.filmes) {
+            if (f.equals(filme)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }
