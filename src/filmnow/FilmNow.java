@@ -47,33 +47,22 @@ public class FilmNow {
      * @param ano Ano de lançamento do filme.
      * @param local Local onde o filme pode ser assistido.
      */
-    public boolean cadastraFilme(int posicao, String nome, int ano, String local) {
+    public String cadastraFilme(int posicao, String nome, int ano, String local) {
         Filme novoFilme = new Filme(nome, ano, local);
+
         if (verificaFilme(novoFilme)) {
-            return false;
+            return "Filme já adicionado!";
+        }
+        if (posicao > TAM_FILMES || posicao < 0) {
+            return "Posição inválida!";
+        }
+        if (nome.isEmpty() || local.isEmpty()) {
+            return "Filme inválido!";
         }
 
         this.filmes[posicao] = novoFilme;
-        return true;
+        return "Filme adicionado com sucesso!";
     }
-
-//    public String[] mostrarFilmes() {
-//        String[] buffer = new String[TAMANHO];
-//
-//        int i = 0;
-//        for (Filme filme : this.filmes) {
-//            if (filme != null) {
-//                buffer[i++] = filme.toString();
-//            }
-//        }
-//
-//        String[] filmesMostrados = new String[i];
-//        for (int j = 0; j < i; j++) {
-//            filmesMostrados[j] = buffer[j];
-//        }
-//
-//        return filmesMostrados;
-//    }
 
     public boolean atribuirHot(int posicaoFilme, int posicaoHot){
         Filme filmeAdicionado = this.filmes[posicaoFilme];

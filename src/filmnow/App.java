@@ -178,14 +178,17 @@ public class App {
      */
     private static void adicionarFilme(FilmNow fn, Scanner scanner) {
         System.out.print("\nPosição no sistema> ");
-        int posicao = scanner.nextInt();
+        int posicao = scanner.nextInt(); scanner.nextLine();
         System.out.print("\nNome> ");
-        String nome = scanner.next();
+        String nome = scanner.nextLine();
         System.out.print("\nAno> ");
-        int ano = scanner.nextInt();
+        int ano = scanner.nextInt(); scanner.nextLine();
         System.out.print("\nLocal> ");
-        String local = scanner.next();
-        fn.cadastraFilme(posicao, nome, ano, local);
+        String local = scanner.nextLine();
+
+        String mensagem = fn.cadastraFilme(posicao, nome, ano, local);
+
+        System.out.println(mensagem);
     }
 
     /**
