@@ -1,10 +1,22 @@
 package filmnow;
 
+/**
+ * Representação de um filme
+ *
+ * @author Davi
+ */
 public class Filme {
     private String nome;
     private int anoDeLancamento;
     private String localDisponivel;
 
+    /**
+     * Cria o filme
+     *
+     * @param nome Nome do filme
+     * @param ano Ano de lançamento do filme
+     * @param local Local aonde o filme pode ser assistindo
+     */
     public Filme(String nome, int ano, String local) {
         this.nome = nome;
         this.anoDeLancamento = ano;

@@ -5,10 +5,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Interface com menus texto para manipular o sistema FilmNow.
+ * Interface com menus-texto para manipular o sistema FilmNow.
  *
  * @author eliane
- *
  */
 public class App {
     public static void main(String[] args) {
@@ -41,7 +40,6 @@ public class App {
      * @param scanner Para captura da opção do usuário/a.
      * @return O comando escolhido.
      */
-
     private static String menu(Scanner scanner) {
         System.out.println(
                 "\n---\nMENU\n" +
@@ -102,7 +100,7 @@ public class App {
         Filme[] filmes = fn.getFilmes();
         for (int i = 0; i < filmes.length; i++) {
             if (filmes[i] != null) {
-                System.out.println(formataFilme(i, filmes[i]));
+                System.out.println(formataFilme(i+1, filmes[i]));
             }
         }
     }
@@ -125,20 +123,31 @@ public class App {
         if (fn.isHot(filme)) {
             System.out.println("Dados do filme:\n" + "\uD83D\uDD25 " + filme);
         } else {
-        System.out.println("Dados do filme:\n" + filme);
+            System.out.println("Dados do filme:\n" + filme);
         }
     }
 
+    /**
+     * Imprime os filmes na HotList
+     *
+     * @param fn O sistema FilmNow a ser manipulado
+     */
     private static void mostrarHotList(FilmNow fn) {
         Filme[] hotlist = fn.getHotList();
 
         for (int i = 0; i < hotlist.length; i++) {
             if (hotlist[i] != null) {
-                System.out.println(formataFilme(i, hotlist[i]));
+                System.out.println(formataFilme(i+1, hotlist[i]));
             }
         }
     }
 
+    /**
+     * Adiciona um filme da lista principal à HotList na posição indicada pelo/a usuário/a
+     *
+     * @param fn O sistema FilmNow a ser manipulado
+     * @param scanner Scanner para receber a entrada do/a usuário/a
+     */
     private static void atribuirHot(FilmNow fn, Scanner scanner) {
         System.out.print("Filme> ");
         int posicaoFilme = scanner.nextInt();
@@ -152,6 +161,12 @@ public class App {
         }
     }
 
+    /**
+     * Remove um filme da HotList na posição indicada
+     *
+     * @param fn O sistema FilmNow a ser manipulado
+     * @param scanner Scanner para receber a entrada do/a usuário/a
+     */
     private static void removerHot(FilmNow fn, Scanner scanner) {
         System.out.print("Posição> ");
         int posicao = scanner.nextInt();
