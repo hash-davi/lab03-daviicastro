@@ -54,7 +54,7 @@ public class LeitorFilmNow {
     private void processaLinhaCsvFilmes(String[] campos, FilmNow fn) {
         int posicao = Integer.parseInt(campos[COLUNA_POSICAO]);
         String nome = campos[COLUNA_NOME].trim();
-        String ano = campos[COLUNA_ANO].trim();
+        int ano = Integer.parseInt(campos[COLUNA_ANO].trim());
         String local = campos[COLUNA_LOCAL].trim();
 
         fn.cadastraFilme(posicao, nome, ano, local);

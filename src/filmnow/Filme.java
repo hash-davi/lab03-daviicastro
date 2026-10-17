@@ -40,8 +40,7 @@ public class Filme {
 
     @Override
     public String toString() {
-        return "Nome: " + this.nome + "\n" +
-                "Ano de lançamento: " + this.anoDeLancamento + "\n" +
-                "Onde assistir: " + this.localDisponivel;
+        return this.nome + ", " + this.anoDeLancamento + "\n" +
+                this.localDisponivel;
     }
 }

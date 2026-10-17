@@ -29,13 +29,15 @@ public class FilmNow {
         return this.filmes.clone();
     }
 
+    public Filme[] getHotList() { return this.hotList.clone(); }
+
     /**
      * Acessa os dados de um filme específico.
      * @param posicao Posição do filme no sistema.
      * @return Dados do filme. Null se não há filme na posição.
      */
     public Filme getFilme(int posicao) {
-        return filmes[posicao];
+        return this.filmes[posicao];
     }
 
     /**
@@ -43,16 +45,16 @@ public class FilmNow {
      * @param posicao Posição do filme.
      * @param nome Nome do filme.
      * @param ano Ano de lançamento do filme.
-     * @param local Local onde o filme pode ser assitido.
+     * @param local Local onde o filme pode ser assistido.
      */
     public boolean cadastraFilme(int posicao, String nome, int ano, String local) {
         Filme novoFilme = new Filme(nome, ano, local);
         if (verificaFilme(novoFilme)) {
-            this.filmes[posicao] = novoFilme;
-            return true;
+            return false;
         }
 
-        return false;
+        this.filmes[posicao] = novoFilme;
+        return true;
     }
 
 //    public String[] mostrarFilmes() {
@@ -84,8 +86,14 @@ public class FilmNow {
         return true;
     }
 
+    public void removerHot(int posicao) {
+        this.hotList[posicao] = null;
+    }
+
     public boolean isHot(Filme filme) {
         for (Filme hot : this.hotList) {
+            if (hot == null) continue;
+
             if (hot.equals(filme)) {
                 return true;
             }
@@ -96,6 +104,8 @@ public class FilmNow {
 
     private boolean verificaFilme(Filme filme) {
         for (Filme f : this.filmes) {
+            if (f == null) continue;
+
             if (f.equals(filme)) {
                 return true;
             }

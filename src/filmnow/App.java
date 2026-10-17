@@ -48,6 +48,9 @@ public class App {
                         "(A)Adicionar filme\n" +
                         "(M)Mostrar todos\n" +
                         "(D)Detalhar filme\n" +
+                        "(E)Exibir HotList\n" +
+                        "(H)Atribuir Hot\n" +
+                        "(R)Remover Hot\n" +
                         "(S)air\n" +
                         "\n" +
                         "Opção> ");
@@ -64,13 +67,22 @@ public class App {
     private static void comando(String opcao, FilmNow fn, Scanner scanner) {
         switch (opcao) {
             case "A":
-                adicionaFilme(fn, scanner);
+                adicionarFilme(fn, scanner);
                 break;
             case "M":
                 mostrarFilmes(fn);
                 break;
             case "D":
                 detalharFilme(fn, scanner);
+                break;
+            case "E":
+                mostrarHotList(fn);
+                break;
+            case "H":
+                atribuirHot(fn, scanner);
+                break;
+            case "R":
+                removerHot(fn, scanner);
                 break;
             case "S":
                 sai();
@@ -90,7 +102,7 @@ public class App {
         Filme[] filmes = fn.getFilmes();
         for (int i = 0; i < filmes.length; i++) {
             if (filmes[i] != null) {
-                System.out.println(formataFilme(i, filmes[i].getNome()));
+                System.out.println(formataFilme(i, filmes[i]));
             }
         }
     }
@@ -105,10 +117,46 @@ public class App {
         System.out.print("\nQual filme> ");
         int posicao = scanner.nextInt();
         Filme filme = fn.getFilme(posicao);
-        if (fn.isHot(filme)) {
-            System.out.println("Dados do filme:\n" + filme);
+
+        if (filme == null) {
+            System.out.println("Posição inválida!");
         }
+
+        if (fn.isHot(filme)) {
+            System.out.println("Dados do filme:\n" + "\uD83D\uDD25 " + filme);
+        } else {
         System.out.println("Dados do filme:\n" + filme);
+        }
+    }
+
+    private static void mostrarHotList(FilmNow fn) {
+        Filme[] hotlist = fn.getHotList();
+
+        for (int i = 0; i < hotlist.length; i++) {
+            if (hotlist[i] != null) {
+                System.out.println(formataFilme(i, hotlist[i]));
+            }
+        }
+    }
+
+    private static void atribuirHot(FilmNow fn, Scanner scanner) {
+        System.out.print("Filme> ");
+        int posicaoFilme = scanner.nextInt();
+        System.out.print("Posição> ");
+        int posicaoHot = scanner.nextInt();
+
+        if (fn.atribuirHot(posicaoFilme, posicaoHot)) {
+            System.out.println("\nAdicionado à HotList na posição " + posicaoHot + "!");
+        } else {
+            System.out.println("\nPosição inválida!");
+        }
+    }
+
+    private static void removerHot(FilmNow fn, Scanner scanner) {
+        System.out.print("Posição> ");
+        int posicao = scanner.nextInt();
+
+        fn.removerHot(posicao);
     }
 
     /**
@@ -118,8 +166,8 @@ public class App {
      * @param filme O filme a ser impresso.
      * @return A String formatada.
      */
-    private static String formataFilme(int posicao, String filme) {
-        return posicao + " - " + filme;
+    private static String formataFilme(int posicao, Filme filme) {
+        return posicao + " - " + filme.getNome() + ", " + filme.getAnoDeLancamento();
     }
 
     /**
@@ -128,7 +176,7 @@ public class App {
      * @param fn O sistema FilmNow a ser manipulado.
      * @param scanner Scanner para pedir informações do contato.
      */
-    private static void adicionaFilme(FilmNow fn, Scanner scanner) {
+    private static void adicionarFilme(FilmNow fn, Scanner scanner) {
         System.out.print("\nPosição no sistema> ");
         int posicao = scanner.nextInt();
         System.out.print("\nNome> ");
